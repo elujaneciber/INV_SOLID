@@ -14,11 +14,11 @@ import javax.swing.table.AbstractTableModel;
  */
 public class JTableModel extends AbstractTableModel {
 
-    private String[] colums = {"ID", "Name Product", "Price", "Stock"};
+    private final String[] colums = {"ID", "Name Product", "Price", "Stock"};
     private List<Product> product = new ArrayList<>();
 
-    public JTableModel(List<Product> product) {
-        this.product = product;
+    public JTableModel(List<Product> prod) {
+        this.product = prod;
     }
 
     @Override
@@ -49,11 +49,12 @@ public class JTableModel extends AbstractTableModel {
 
     }
     
-    public String GetColumnName (int column){
+    @Override
+    public String getColumnName (int column){
         return this.colums[column];
     } 
     
-    public void UpdateJTable (){
+    public void updateJTable (){
         fireTableDataChanged();
     }
     

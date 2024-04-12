@@ -12,15 +12,14 @@ import java.util.List;
  *
  * @author nn
  */
-public class Inventory {
+public class TableInventory {
 
     private HashMap<Integer, Product> listProducts = new HashMap<>();
 
-    public Inventory() {
+    public TableInventory() {
         this.listProducts.put(1, new Product(1, "Arroz", 5500, 65));
-        this.listProducts.put(1, new Product(2, "Cafe", 980, 647));
-        this.listProducts.put(1, new Product(3, "Cepillos", 550, 12));
-        this.listProducts.put(1, new Product(4, "Jabon Liquido", 7800, 24212));
+        this.listProducts.put(2, new Product(2, "Cafe", 980, 647));
+        this.listProducts.put(3, new Product(3, "Cepillos", 550, 12));
     }
 
     public List<Product> getListProducts() {
@@ -46,22 +45,22 @@ public class Inventory {
 
     public int consecutiveId() {
         int id = 0;
-        for (Product x : this.listProducts.values()) {
-            id = x.getId();
+        for (Product p : this.listProducts.values()) {
+            id = p.getId();
         }
         return id;
     }
 
-    public void addNewProduct(Product x) {
-        this.listProducts.put(x.getId(), x);
+    public void addNewProduct(Product p) {
+        this.listProducts.put(p.getId(), p);
     }
 
-    public void updateProduct(Product x) {
-        this.listProducts.replace(x.getId(), x);
+    public void updateProduct(Product p) {
+        this.listProducts.replace(p.getId(), p);
     }
 
-    public void deleteProduct(Product x) {
-        this.listProducts.remove(x.getId(), x);
+    public void deleteProduct(Product p) {
+        this.listProducts.remove(p.getId(), p);
     }
 
 }
