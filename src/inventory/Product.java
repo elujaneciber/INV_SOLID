@@ -9,6 +9,7 @@ package inventory;
  * @author nn
  */
 public class Product {
+
     private int id;
     private String name;
     private double price;
@@ -55,6 +56,5 @@ public class Product {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
-    
+
 }
