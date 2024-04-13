@@ -14,53 +14,59 @@ import java.util.List;
  */
 public class TableInventory {
 
-    private HashMap<Integer, Product> listProducts = new HashMap<>();
-
+    private List<Product> listProducts;
+    
     public TableInventory() {
-        this.listProducts.put(1, new Product(1, "Arroz", 5500, 65));
-        this.listProducts.put(2, new Product(2, "Cafe", 980, 647));
-        this.listProducts.put(3, new Product(3, "Cepillos", 550, 12));
+        this.listProducts = new ArrayList<>();
     }
 
     public List<Product> getListProducts() {
-        return new ArrayList<>(this.listProducts.values());
+        return this.listProducts;
+    }
+        
+    public void addProduct (Product product) {
+       this.listProducts.add(product);
     }
 
-    public void setListProducts(HashMap<Integer, Product> listProducts) {
-        this.listProducts = listProducts;
+    public void deleteProduct(Product product) {
+        this.listProducts.remove(product);
     }
 
-    public Boolean checkInventory(Product product) {
-        return this.listProducts.containsKey(product.getId());
+    public void modificarProducto(int id, String newName, double newPrice, int newStock) {
+        for (Product product : this.listProducts) {
+            if (product.getId() == id) {
+                product.setName(newName);
+                product.setPrice(newPrice);
+                product.setStock(newStock);
+                return;
+            }
+        }
     }
 
-    public Boolean checkInventory(String name) {
-        for (Product x : this.listProducts.values()) {
-            if (name.toLowerCase().equals(x.getName().toLowerCase())) {
+    public boolean checkInventory (int id) {
+        for (Product product : this.listProducts) {
+            if (product.getId() == id) {
                 return true;
             }
         }
         return false;
     }
 
-    public int consecutiveId() {
+    public boolean checkInventory(String name) {
+        for (Product product : this.listProducts) {
+            String productName = product.getName();
+            if (productName != null && productName.equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+  
+  public int consecutiveId() {
         int id = 0;
-        for (Product p : this.listProducts.values()) {
-            id = p.getId();
+        for (Product product : this.listProducts) {
+            id = product.getId();
         }
         return id;
     }
-
-    public void addNewProduct(Product p) {
-        this.listProducts.put(p.getId(), p);
-    }
-
-    public void updateProduct(Product p) {
-        this.listProducts.replace(p.getId(), p);
-    }
-
-    public void deleteProduct(Product p) {
-        this.listProducts.remove(p.getId(), p);
-    }
-
 }

@@ -4,6 +4,8 @@
  */
 package inventory;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nn
@@ -23,6 +25,7 @@ public class InterfazJFrame extends javax.swing.JFrame {
     public InterfazJFrame() {
         initComponents();
         this.jTableInventory.setModel(new JTableModel(Inventory.getListProducts()));
+        //System.out.println(Inventory.getListProducts());
     }
 
     /**
@@ -35,13 +38,13 @@ public class InterfazJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        textID = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        textName = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        textPrice = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textStock = new javax.swing.JTextField();
+        txtStock = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableInventory = new javax.swing.JTable();
@@ -55,46 +58,24 @@ public class InterfazJFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("ID");
 
-        textID.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        textID.setText("jTextField1");
-        textID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIDActionPerformed(evt);
-            }
-        });
+        txtID.setEditable(false);
+        txtID.setBackground(new java.awt.Color(204, 204, 204));
+        txtID.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel2.setText("Name");
 
-        textName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        textName.setText("jTextField1");
-        textName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textNameActionPerformed(evt);
-            }
-        });
+        txtName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel3.setText("Price");
 
-        textPrice.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        textPrice.setText("jTextField1");
-        textPrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textPriceActionPerformed(evt);
-            }
-        });
+        txtPrice.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel4.setText("Stock");
 
-        textStock.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        textStock.setText("jTextField1");
-        textStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textStockActionPerformed(evt);
-            }
-        });
+        txtStock.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 3, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,13 +89,28 @@ public class InterfazJFrame extends javax.swing.JFrame {
 
             }
         ));
+        jTableInventory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableInventoryMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableInventory);
 
         btnAdd.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDelete.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         btnUpdate.setText("Update");
@@ -132,15 +128,15 @@ public class InterfazJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textStock, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDelete)
                         .addGap(28, 28, 28)
@@ -152,7 +148,7 @@ public class InterfazJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
@@ -176,19 +172,19 @@ public class InterfazJFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(textPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(textStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAdd)
@@ -200,22 +196,58 @@ public class InterfazJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textIDActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if(validateBlankFields ()){
+            if(!Inventory.checkInventory(name)){
+                if(id == 0){
+                    int newID = Inventory.consecutiveId() + 1;
+                    Inventory.addProduct(new Product(newID, name, price, stock));
+                    this.jTableInventory.setModel(new JTableModel(Inventory.getListProducts()));
+                    clearFields();    
+                }else{
+                    
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Ya existe ese nombre", "Advertencia", 2);
+            }
+            
+        }else{
+           JOptionPane.showMessageDialog(this, "Valores en blanco", "Advertencia", 2);
+        }
+        
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void textNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNameActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        deleteProduct ();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void textPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textPriceActionPerformed
+    private void jTableInventoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableInventoryMouseClicked
+        Product product = ((JTableModel) this.jTableInventory.getModel()) .detail(this.jTableInventory.getSelectedRow());
+        this.txtID.setText(String.valueOf(product.getId()));
+        this.txtName.setText(product.getName());
+        this.txtPrice.setText(String.valueOf(product.getPrice()));
+        this.txtStock.setText(String.valueOf(product.getStock()));
+    }//GEN-LAST:event_jTableInventoryMouseClicked
 
-    private void textStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textStockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textStockActionPerformed
-
+    public boolean validateBlankFields(){
+        try {
+            id = Integer.parseInt("".equals(txtID.getText()) ? "0" : txtID.getText());
+            name = txtName.getText();
+            price = Double.parseDouble(txtPrice.getText());
+            stock = Integer.parseInt(txtStock.getText());
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+    
+    public void clearFields (){
+        this.txtID.setText("");
+        this.txtName.setText("");
+        this.txtPrice.setText("");
+        this.txtStock.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -263,9 +295,9 @@ public class InterfazJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableInventory;
-    private javax.swing.JTextField textID;
-    private javax.swing.JTextField textName;
-    private javax.swing.JTextField textPrice;
-    private javax.swing.JTextField textStock;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

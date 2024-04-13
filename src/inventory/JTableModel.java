@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class JTableModel extends AbstractTableModel {
 
-    private final String[] colums = {"ID", "Name Product", "Price", "Stock"};
+    private String[] colums = {"ID", "Name Product", "Price", "Stock"};
     private List<Product> product = new ArrayList<>();
 
     public JTableModel(List<Product> prod) {
@@ -38,16 +38,21 @@ public class JTableModel extends AbstractTableModel {
         switch (column) {
             case 0:
                 reply = this.product.get(row).getId();
+                break;
             case 1:
                 reply = this.product.get(row).getName();
+                break;
             case 2:
                 reply = this.product.get(row).getPrice();
+                break;
             default:
                 reply = this.product.get(row).getStock();
         }
         return reply;
 
     }
+    
+    
     
     @Override
     public String getColumnName (int column){
