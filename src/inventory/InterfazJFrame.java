@@ -89,6 +89,11 @@ public class InterfazJFrame extends javax.swing.JFrame {
 
             }
         ));
+        jTableInventory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableInventoryMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableInventory);
 
         btnAdd.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
@@ -101,6 +106,11 @@ public class InterfazJFrame extends javax.swing.JFrame {
 
         btnDelete.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         btnUpdate.setText("Update");
@@ -187,16 +197,42 @@ public class InterfazJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        
-        
-        clearFields();
+        if(validateBlankFields ()){
+            if(!Inventory.checkInventory(name)){
+                if(id == 0){
+                    int newID = Inventory.consecutiveId() + 1;
+                    Inventory.addProduct(new Product(newID, name, price, stock));
+                    this.jTableInventory.setModel(new JTableModel(Inventory.getListProducts()));
+                    clearFields();    
+                }else{
+                    
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Ya existe ese nombre", "Advertencia", 2);
+            }
+            
+        }else{
+           JOptionPane.showMessageDialog(this, "Valores en blanco", "Advertencia", 2);
+        }
         
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        deleteProduct ();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jTableInventoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableInventoryMouseClicked
+        Product product = ((JTableModel) this.jTableInventory.getModel()) .detail(this.jTableInventory.getSelectedRow());
+        this.txtID.setText(String.valueOf(product.getId()));
+        this.txtName.setText(product.getName());
+        this.txtPrice.setText(String.valueOf(product.getPrice()));
+        this.txtStock.setText(String.valueOf(product.getStock()));
+    }//GEN-LAST:event_jTableInventoryMouseClicked
 
     public boolean validateBlankFields(){
         try {
             id = Integer.parseInt("".equals(txtID.getText()) ? "0" : txtID.getText());
-            name = txtName.getName();
+            name = txtName.getText();
             price = Double.parseDouble(txtPrice.getText());
             stock = Integer.parseInt(txtStock.getText());
             return true;
