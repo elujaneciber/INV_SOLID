@@ -15,7 +15,7 @@ import java.util.List;
 public class TableInventory {
 
     private List<Product> listProducts;
-    
+
     public TableInventory() {
         this.listProducts = new ArrayList<>();
     }
@@ -23,25 +23,21 @@ public class TableInventory {
     public List<Product> getListProducts() {
         return this.listProducts;
     }
-        
-    public void addProduct (Product product) {
-       this.listProducts.add(product);
+
+    public void addProduct(Product product) {
+        this.listProducts.add(product);
     }
 
-    /*public void deleteProduct(Product product) {
-        this.listProducts.remove(product);
-    }*/
-    
     public void deleteProduct(int id) {
-    Iterator<Product> iterator = this.listProducts.iterator();
-    while (iterator.hasNext()) {
-        Product product = iterator.next();
-        if (product.getId() == id) {
-            iterator.remove();
-            return;
+        Iterator<Product> iterator = this.listProducts.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getId() == id) {
+                iterator.remove();
+                return;
+            }
         }
     }
-}
 
     public void updateProduct(int id, String newName, double newPrice, int newStock) {
         for (Product product : this.listProducts) {
@@ -54,7 +50,7 @@ public class TableInventory {
         }
     }
 
-    public boolean checkInventory (int id) {
+    public boolean checkInventory(int id) {
         for (Product product : this.listProducts) {
             if (product.getId() == id) {
                 return true;
@@ -72,8 +68,8 @@ public class TableInventory {
         }
         return false;
     }
-  
-  public int consecutiveId() {
+
+    public int consecutiveId() {
         int id = 0;
         for (Product product : this.listProducts) {
             id = product.getId();
