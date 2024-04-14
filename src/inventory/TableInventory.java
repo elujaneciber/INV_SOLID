@@ -5,7 +5,6 @@
 package inventory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,11 +32,11 @@ public class TableInventory {
         this.listProducts.remove(product);
     }*/
     
-    public void deleteProduct(int id, String name, double price, int stock) {
+    public void deleteProduct(int id) {
     Iterator<Product> iterator = this.listProducts.iterator();
     while (iterator.hasNext()) {
         Product product = iterator.next();
-        if (product.getId() == id && product.getName().equals(name) && product.getPrice() == price && product.getStock() == stock) {
+        if (product.getId() == id) {
             iterator.remove();
             return;
         }

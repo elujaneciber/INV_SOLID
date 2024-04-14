@@ -51,19 +51,17 @@ public class JTableModel extends AbstractTableModel {
         return reply;
 
     }
-    
-    
-    
+
     @Override
-    public String getColumnName (int column){
+    public String getColumnName(int column) {
         return this.colums[column];
-    } 
-    
-    public void updateJTable (){
+    }
+
+    public void updateJTable() {
         fireTableDataChanged();
     }
-    
-    public Product detail (int row){
+
+    public Product detail(int row) {
         return this.product.get(row);
     }
 }
